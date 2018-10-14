@@ -1,7 +1,9 @@
 import React from 'react';
 
-function MovieTitle(props) {
-	<div></div>
-}
+const MovieTitle = ({movie}) => (
+  <li className="list-group-item">
+  	{movie}
+  </li>
+)
 
 export default MovieTitle; 
