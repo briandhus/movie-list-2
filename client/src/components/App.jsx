@@ -1,7 +1,8 @@
 import React from 'react';
-import movies from '../data/sampleMovieList.js';
+import $ from 'jquery';
+// import movies from '../data/sampleMovieList.js';
 import MovieTitleList from './MovieTitleList.jsx';
-// import MovieTitle from './MovieTitle.js';
+import MovieTitle from './MovieTitle.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,11 +22,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="movie-list">
-        <h1>Movie List</h1>
-        <div>
-          <ul><MovieTitleList titles={this.state.movieTitle} /></ul>
+      <div className="container movie-list">
+        <div className="nav">
+          <h1 className="titleText">MovieList</h1>
         </div>
+        <div>
+          <MovieTitleList titles={this.state.movieTitle} />
+        </div>        
       </div>
     );
   }
