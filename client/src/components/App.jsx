@@ -16,7 +16,7 @@ class App extends React.Component {
       {title: 'Ex Machina'}
     ];
     this.state = {
-      data: [],
+      // data: [],
       title: movies,
       inputValue: ''
     },
@@ -24,14 +24,23 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  filteredSelection(str) {
+    this.state.title.forEach((ele) => {
+      if (ele.includes(str)) {
+        this.setState({title: ele});
+      }     
+    });
+  }
+  
   handleChange(event) {
     this.setState({inputValue: event.target.value});
   } 
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('submit confirmed');
+    filteredSelection(this.state.inputValue);
   }
+
 
   render() {
 
