@@ -34,23 +34,15 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div className="container movie-list">
-
         <div className="nav">
           <h1 className="titleText">MovieList</h1>
         </div>
-
-        <div className="row">
-          <div className="col-md-12">
-            <SearchBar inputValue={this.state.inputValue} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-          </div>
-        </div>
-     
-        <div>
-          <MovieTitleList titles={this.state.title} />
-        </div> 
-       
+        <SearchBar inputValue={this.state.inputValue} handleChange={this.handleChange} 
+          handleSubmit={this.handleSubmit}/>
+        <MovieTitleList titles={this.state.title} />        
       </div>
     );
   }
