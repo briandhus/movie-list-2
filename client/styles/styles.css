@@ -1,9 +1,27 @@
+.movie-list {
+	max-width: 60%;
+}
+
 .nav {
-	background-color: #bcbcbc;
+	background-color: #d8d8d8;
 }
 
 .titleText {
-	padding-left: 10px;
+	padding: 0px 0px 10px 10px;
 	font-family: 'Patrick Hand', cursive;
 }
 
+form {
+	margin: 30px 0px 10px;
+	line-height: 30px;
+}
+
+#input {
+	margin-right: 2px;
+	border-radius: 3px;
+}
+
+#button {
+	padding-top: 3px;
+	border-radius: 3px;
+}
