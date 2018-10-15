@@ -1,5 +1,5 @@
 .movie-list {
-	max-width: 60%;
+	max-width: 65%;
 }
 
 .nav {
@@ -13,7 +13,7 @@
 
 form {
 	margin: 30px 0px 10px;
-	line-height: 30px;
+	line-height: 25px;
 }
 
 #input {

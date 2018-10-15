@@ -18,18 +18,19 @@ class App extends React.Component {
     this.state = {
       data: [],
       title: movies,
-      value: ''
+      inputValue: ''
     },
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({inputValue: event.target.value});
   } 
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log('submit confirmed');
   }
 
   render() {
@@ -42,7 +43,7 @@ class App extends React.Component {
 
         <div className="row">
           <div className="col-md-12">
-            <SearchBar value={this.state.value} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+            <SearchBar inputValue={this.state.inputValue} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
           </div>
         </div>
      
