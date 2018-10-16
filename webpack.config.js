@@ -17,7 +17,11 @@ module.exports = {
 	          presets: ['@babel/preset-env', '@babel/preset-react'] // translates es6 to es5
 	        }
 	      }
-	    }
+	    },
+	    {
+		  test: /\.css$/,
+		  use: ['style-loader', 'css-loader']
+		}
 	  ]
 	},
 	mode: 'development'

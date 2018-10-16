@@ -1,6 +1,5 @@
 import React from 'react';
 import $ from 'jquery';
-// import movies from '../data/sampleMovieList.js';
 import MovieTitleList from './MovieTitleList.jsx';
 import MovieTitle from './MovieTitle.jsx';
 import SearchBar from './SearchBar.jsx';
@@ -22,6 +21,7 @@ class App extends React.Component {
     },
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getMovies = this.getMovies.bind(this);
   }
 
   filteredSelection(str) {
@@ -31,6 +31,18 @@ class App extends React.Component {
       }     
     });
   }
+
+  getMovies() {
+    $.ajax('/movies', {
+      success: (title) => {
+        this.setState({title})
+      }
+    })
+  }
+
+  componentDidMount() {
+    this.getMovies();
+  }
   
   handleChange(event) {
     this.setState({inputValue: event.target.value});
@@ -38,7 +50,7 @@ class App extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    filteredSelection(this.state.inputValue);
+    this.filteredSelection(this.state.inputValue);
   }
 
 
