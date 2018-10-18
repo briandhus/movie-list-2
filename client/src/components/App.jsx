@@ -7,16 +7,10 @@ import SearchBar from './SearchBar.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const movies = [
-      {title: 'Mean Girls'},
-      {title: 'Hackers'},
-      {title: 'The Grey'},
-      {title: 'Sunshine'},
-      {title: 'Ex Machina'}
-    ];
+    const movies = [];
     this.state = {
       // data: [],
-      title: movies,
+      movie: movies,
       inputValue: ''
     },
     this.handleChange = this.handleChange.bind(this);
@@ -25,17 +19,21 @@ class App extends React.Component {
   }
 
   filteredSelection(str) {
-    this.state.title.forEach((ele) => {
-      if (ele.includes(str)) {
-        this.setState({title: ele});
+    str = str.toLowerCase();
+    let filteredMovies = [];
+    this.state.movie.forEach((ele) => {
+      let titleLowerCase = ele.title.toLowerCase();
+      if (titleLowerCase.includes(str)) {
+        filteredMovies.push(ele);
       }     
     });
+    this.setState({movie: filteredMovies});
   }
 
   getMovies() {
     $.ajax('/movies', {
-      success: (title) => {
-        this.setState({title})
+      success: (movie) => {
+        this.setState({movie})
       }
     })
   }
@@ -63,7 +61,7 @@ class App extends React.Component {
         </div>
         <SearchBar inputValue={this.state.inputValue} handleChange={this.handleChange} 
           handleSubmit={this.handleSubmit}/>
-        <MovieTitleList titles={this.state.title} />        
+        <MovieTitleList titles={this.state.movie} />        
       </div>
     );
   }
