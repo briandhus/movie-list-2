@@ -15,48 +15,26 @@ var connection = mysql.createConnection({
   database : 'movielist'
 });
 
-//query database
-function getAll(callback) {
-  connection.query('SELECT * FROM movies', function (error, results) {
-	  if (error) {
-		  callback(error);
-	 	  return;
-		}
-		callback(null, results);
-  });	
-}
-
-//server query
 app.get('/movies', function (req, res) {
-  getAll((err, results) => {
-  	if (err) {
-  	  res.status(500).send(err);
-  	} else {
+  connection.query('SELECT * FROM movies', function (error, results) {
+    if (error) {
+      res.status(500).send(error);
+    } else {
       res.send(results);
-  	}
-  })
+    }
+  }); 
 });
 
-function insert(item, quantity, callback) {
-	const query = `INSERT INTO groceries (title) VALUES (?)`;
-	connection.query(query, [title], function (error, results) {
-	  if (error) {
-	  	callback(error);
-	  	return;
-	  }
-	  callback(null, 'success!');
-	});	
-}
-
 app.post('/movies', function (req, res) {
-  console.log(req.body);
-  db.insertOne(req.body.title, (err, results) => {
-  	if (err) {
-  	  res.status(500).send(err);
-  	} else {
-  	  res.send(results);
-  	}
-  })
+  const query = `INSERT INTO movies (title) VALUES (?)`;
+  var title = req.body.title;
+  connection.query(query, [title], function (error, results) {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.send();
+    }
+  });
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
