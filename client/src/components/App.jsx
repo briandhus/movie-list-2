@@ -4,12 +4,12 @@ import MovieTitleList from './MovieTitleList.jsx';
 import MovieTitle from './MovieTitle.jsx';
 import SearchBar from './SearchBar.jsx';
 
+let movies = [];
+
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const movies = [];
     this.state = {
-      // data: [],
       movie: movies,
       inputValue: ''
     },
@@ -20,29 +20,34 @@ class App extends React.Component {
 
   filteredSelection(str) {
     str = str.toLowerCase();
-    let filteredMovies = [];
-    this.state.movie.forEach((ele) => {
-      let titleLowerCase = ele.title.toLowerCase();
-      if (titleLowerCase.includes(str)) {
-        filteredMovies.push(ele);
-      }     
-    });
-    this.setState({movie: filteredMovies});
+    let filteredMovies = this.state.movie.filter(el => {
+      return el.title.toLowerCase().includes(str);
+    })
+    if (filteredMovies.length === 0) {
+      this.setState({movie: [{title: `Sorry, we couldn't find a match for your search. Please try another search.`}]});
+    } else {
+      this.setState({movie: filteredMovies});  
+    } 
+  }
+
+
+  componentDidMount() {
+    this.getMovies();
   }
 
   getMovies() {
     $.ajax('/movies', {
       success: (movie) => {
+        movies = movie;
         this.setState({movie})
       }
     })
   }
-
-  componentDidMount() {
-    this.getMovies();
-  }
-  
+ 
   handleChange(event) {
+    if (event.target.value === '') {
+      this.setState({movie: movies});
+    }
     this.setState({inputValue: event.target.value});
   } 
 
